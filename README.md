@@ -13,4 +13,11 @@ In order to implement mongoDB in the app I used a free mongo-db hosting service 
 For convenience I have left the url link to that database but it can be swapped out with your own mongodb link.
 You will find this in the server.js file at line 13
 ****
+<<<<<<< HEAD
 Once the server is running, navigate to = http://localhost:8080/
+=======
+const dbRoute = 'mongodb://idoroz:db123456@ds127954.mlab.com:27954/_anymusic_db';
+****
+
+Once the server is running, navigate to = http://localhost:8080/
+>>>>>>> 9ffb2b0161a04ca7eca6ac11d4389506420f0388
