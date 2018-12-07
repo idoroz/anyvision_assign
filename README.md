@@ -1,9 +1,9 @@
 README : AnyVision Home Assignment
 
-This zipfile contains all the files needed to run this application.
+This repo contains all the files needed to run this application.
 *npm run build* has already been run.
 
-All thats needed in order to run the app is:
+All that is needed in order to run the app is:
 
 - npm install
 - npm start
