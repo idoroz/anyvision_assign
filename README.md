@@ -15,3 +15,5 @@ You will find this in the server.js file at line 13
 ****
 const dbRoute = 'mongodb://idoroz:db123456@ds127954.mlab.com:27954/_anymusic_db';
 ****
+
+Once the server is running, navigate to = http://localhost:8080/
