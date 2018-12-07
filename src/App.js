@@ -23,12 +23,13 @@ class App extends Component {
         fetch('/search/' + query)
             .then(resp => resp.json())
             .then(results => {
+                this.getDataFromDb()
                 this.setState({
                     results: results,
                     detailView: false,
                     selected: []
                 })
-                this.getDataFromDb()
+
             })
             .catch((error) => {
                 console.log(error)

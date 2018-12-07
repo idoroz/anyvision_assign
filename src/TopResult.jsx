@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 	render() {
 return (
 		<li className="collection-item topResult" onClick = {() => this.props.onSearch(this.props.artistName)}>
-		{this.props.artistName}
+		{this.props.artistName}<br/>
 		</li>
 		);
 	}
