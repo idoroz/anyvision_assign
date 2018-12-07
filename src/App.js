@@ -28,6 +28,7 @@ class App extends Component {
                     detailView: false,
                     selected: []
                 })
+                this.getDataFromDb()
             })
             .catch((error) => {
                 console.log(error)
@@ -71,39 +72,33 @@ class App extends Component {
     render() {
 
         return (
-
             <div>
         <Row>     
-  <Col s={6}>
+            <Col s={6}>
 
-     <SearchBar
+                <SearchBar
             search={this.handleSearch.bind(this)}
             detailView={this.state.detailView}>
-            </SearchBar>
-                        <ResultsComponent
+                </SearchBar>
+                <ResultsComponent
             searchResults={this.state.results}
             onView={this.handleViewItem}>
-            </ResultsComponent>
-  </Col>
-  <Col s={6}>
-       
-            <TopTenList
+                </ResultsComponent>
+            </Col>
+            <Col s={6}>
+                <TopTenList
             topten={this.state.dbData}
             detailView={this.state.detailView}
             returnToSearch={this.backToSearch.bind(this)}>
-            </TopTenList>
-  </Col>
-</Row>
-
-
-
-            <DetailComponent
+                </TopTenList>
+            </Col>
+        </Row>
+                <DetailComponent
             selected={this.state.selected}
             detailView={this.state.detailView}
-            returnToSearch={this.backToSearch.bind(this)}
-            >
-            </DetailComponent>
-        </div>
+            returnToSearch={this.backToSearch.bind(this)}>
+                </DetailComponent>
+</div>
 
         );
 

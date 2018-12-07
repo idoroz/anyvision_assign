@@ -12,7 +12,6 @@ import {Card, Col, CardTitle} from 'react-materialize'
 								Artist : {this.props.artistName}<br />
 								Track : {this.props.trackName || this.props.album}<br />
 							</p>
-			
     					</Card>
    					 </div>
 				</Col>
