@@ -27,8 +27,8 @@ return (
 					<a href={this.props.selected.appleMusicUrl}>View in Apple Music</a> <br /><br />
 					{this.props.selected.previewUrl.substr(this.props.selected.previewUrl.length - 3) === 'm4a' ? <audio ref="audio_tag" src={this.props.selected.previewUrl} controls /> : <video width ="480" height="351" controls>
 					<source src={this.props.selected.previewUrl.slice(0, -3) + 'mp4'} type="video/mp4" ></source></video>};	
-			 </p>
-			<Chip className="topResult backBtn" onClick = {() => this.props.returnToSearch(this.props.selected.artistName)}>Back</Chip>
+		</p>
+				<Chip className="topResult backBtn" onClick = {() => this.props.returnToSearch(this.props.selected.artistName)}>Back</Chip>
     	</Card>
 	</Col>
 </div>
