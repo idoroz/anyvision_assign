@@ -8,7 +8,6 @@ class ResultsComponent extends Component {
 
 
 	render() {
-console.log(this.props.searchResults.previewUrl)
 		return (
 				<ul className="theShelf">
 						{this.props.searchResults.map(result => <Result
@@ -37,7 +36,7 @@ console.log(this.props.searchResults.previewUrl)
 
 const mapStateToProps = state => ({
   searchResults: state.results.results,
- 
+  
 });
 
 export default connect(mapStateToProps, {})(ResultsComponent);

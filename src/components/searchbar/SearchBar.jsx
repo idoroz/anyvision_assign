@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { searchTerm } from '../../actions/searchAction';
+import { userDetails } from '../../actions/userAction';
 
 class searchbar extends Component {
 
 constructor(props){
       super(props);
       this.state = {
-        searchQuery : ''
+        searchQuery : '',
   }
       this.updateInput = this.updateInput.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,22 +28,21 @@ onKeyPress = (e) => {
     if(e.key === 'Enter'){
         this.props.searchTerm(this.state.searchQuery)
         }
+        console.log(this.props)
     }
+
 
 render(){
 
-	if(!this.props.detailView) {
-
+console.log(this.props)
 return (
     <div className="input-field">
+    {/*<a href="/logout" >Logout</a>*/}
         <input id="searchbar" placeholder="Search for Artist or Track..." onChange={this.updateInput}  onKeyPress={this.onKeyPress}></input>
         <input type="submit" onClick={this.handleSubmit} style={{display: 'none'}}></input>
     </div>
   );
-}
-		if(this.props.detailView) {
-		return null;
-		}
+
 }
 }
 
@@ -50,11 +50,13 @@ return (
 
 searchbar.propTypes = {
   searchTerm: PropTypes.func.isRequired,
+  userDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   results: state.results.items,
+  creds : state.user.creds
  
 });
 
-export default connect(mapStateToProps, { searchTerm })(searchbar);
+export default connect(mapStateToProps, { searchTerm, userDetails })(searchbar);
