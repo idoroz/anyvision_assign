@@ -12,11 +12,14 @@ class TopTenList extends Component {
     this.props.fetchTopTen();
   }
 
+
+
 	render(){
 		let items = this.props.topten;
 	if(!this.props.detailView) {
 return (
 	<div className="topTenList">
+	
 			<ul className="collection with-header">
 			        <li className="collection-header"><h4>Top 10 Searches</h4></li>
 					{items.map(result => <TopResult

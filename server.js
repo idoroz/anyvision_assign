@@ -10,16 +10,14 @@ const router = express.Router();
 const bodyParser = require('body-parser')
 const Data = require('./dataModel');
 const User = require('./userModel');
+const settings = require('./config/settings');
 
 
 require('./config/passport')(passport);
 
 const jwt = require('jsonwebtoken');
 
-
 const port = process.env.PORT || 8080;
-
-
 
 const dbRoute = 'mongodb://idoroz:db12345@ds131814.mlab.com:31814/_anymusic_dev';
 
@@ -33,8 +31,9 @@ db.once('open', () => console.log('connected to database'));
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.urlencoded({
-    extended: false
-}))
+    extended: true
+}));
+app.use(bodyParser.json())
 
 app.use(require('express-session')({
     secret: 'keyboard cat',
@@ -43,12 +42,6 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
@@ -59,23 +52,12 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
-// Post registration
-// app.post('/register', (req, res) => {
-//     User.register(new User({
-//         username: req.body.username,
-//         password: req.body.name
-//     }), req.body.password, function(err, user) {
-//         if (err) {
-//             return res.render('register', {
-//                 user: user
-//             });
-//         }
-
-//         passport.authenticate('local')(req, res, function() {
-//             res.redirect('/home');
-//         });
-//     });
-// });
+app.get('/home', (req, res) => {
+    res.json({
+        success: true,
+        message: 'at home'
+    });
+});
 
 app.post('/register', function(req, res) {
     if (!req.body.username || !req.body.password) {
@@ -96,9 +78,11 @@ app.post('/register', function(req, res) {
                     msg: 'Username already exists.'
                 });
             }
+            let token = jwt.sign(newUser.toJSON(), settings.secret);
+            // return the information including token as JSON
             res.json({
                 success: true,
-                msg: 'Successful created new user.'
+                token: 'JWT ' + token
             });
         });
     }
@@ -129,7 +113,7 @@ app.post('/login', function(req, res) {
             user.comparePassword(req.body.password, function(err, isMatch) {
                 if (isMatch && !err) {
                     // if user is found and password is right create a token
-                    var token = jwt.sign(user.toJSON(), settings.secret);
+                    let token = jwt.sign(user.toJSON(), settings.secret);
                     // return the information including token as JSON
                     res.json({
                         success: true,

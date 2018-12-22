@@ -29,7 +29,7 @@ class LoginPage extends Component {
       .then((result) => {
         localStorage.setItem('jwtToken', result.data.token);
         this.setState({ message: '' });
-        this.props.history.push('/')
+        this.props.history.push('/home')
       })
       .catch((error) => {
         if(error.response.status === 401) {
@@ -49,10 +49,10 @@ class LoginPage extends Component {
             </div>
           }
           <h2 class="form-signin-heading">Please sign in</h2>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="text" class="form-control" placeholder="Email address" name="username" value={username} onChange={this.onChange} required/>
+          <label for="inputEmail" class="sr-only">Username</label>
+          <input type="text" class="form-control" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="text" class="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
+          <input type="password" class="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
           <p>
             Not a member? <Link to="/register"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>

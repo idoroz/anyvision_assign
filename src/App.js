@@ -11,6 +11,11 @@ import { Row, Col } from 'react-materialize';
 
 class App extends Component {
 
+    logout = () => {
+        localStorage.removeItem('jwtToken');
+        window.location.href = '/';
+    }
+
     render() {
 
         return (
@@ -21,6 +26,7 @@ class App extends Component {
 <Route path="/register" component={RegisterPage} />
             <Route path="/home" render={props => <Row>     
                       <Col s={6}>
+                      <button onClick={this.logout}>Log Out</button>
                           <SearchBar />
                           <ResultsComponent />
                       </Col>
