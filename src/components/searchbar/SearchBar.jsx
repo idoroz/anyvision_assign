@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { searchTerm } from '../../actions/searchAction';
 
 class searchbar extends Component {
 
 constructor(props){
       super(props);
       this.state = {
-        searchTerm : ''
+        searchQuery : ''
   }
       this.updateInput = this.updateInput.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,16 +16,16 @@ constructor(props){
   }
 
 updateInput(event){
-    this.setState({searchTerm : event.target.value})
+    this.setState({searchQuery : event.target.value})
 }
 
 handleSubmit(){
-    this.props.search(this.state.searchTerm)
+    this.props.searchTerm(this.state.searchQuery)
 }
 
 onKeyPress = (e) => {
     if(e.key === 'Enter'){
-        this.props.search(this.state.searchTerm)
+        this.props.searchTerm(this.state.searchQuery)
         }
     }
 
@@ -43,4 +46,15 @@ return (
 }
 }
 
-export default searchbar;
+
+
+searchbar.propTypes = {
+  searchTerm: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  results: state.results.items,
+ 
+});
+
+export default connect(mapStateToProps, { searchTerm })(searchbar);
