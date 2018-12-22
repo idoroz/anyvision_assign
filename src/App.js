@@ -17,7 +17,7 @@ class App extends Component {
 
             <Router>
           <div>
-<Route exact path='/'  component={LoginPage}/>
+<Route exact path='/' component={LoginPage}/>
 <Route path="/register" component={RegisterPage} />
             <Route path="/home" render={props => <Row>     
                       <Col s={6}>
@@ -34,29 +34,6 @@ class App extends Component {
           </div>
         </Router>
         )
-        //     return (
-        //         <Router>
-        //   <div>
-        //     <Route exact path='/' render={props => <Row>     
-        //               <Col s={6}>
-        //                   <SearchBar />
-        //                   <ResultsComponent />
-        //               </Col>
-        //               <Col s={6}>
-        //                   <TopTenList />
-        //               </Col>
-        //       </Row>
-        //         }/>
-        //     <Route path="/detail" component={DetailComponent} />
-        // <Route path="/register" component={RegisterPage} />
-        // <Route path="/login" component={LoginPage} />
-
-        //   </div>
-        // </Router>
-
-
-        //     );
-
 
     }
 }

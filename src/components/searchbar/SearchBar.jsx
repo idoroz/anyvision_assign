@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { searchTerm } from '../../actions/searchAction';
-import { userDetails } from '../../actions/userAction';
 
 class searchbar extends Component {
 
@@ -28,7 +27,6 @@ onKeyPress = (e) => {
     if(e.key === 'Enter'){
         this.props.searchTerm(this.state.searchQuery)
         }
-        console.log(this.props)
     }
 
 
@@ -37,7 +35,6 @@ render(){
 console.log(this.props)
 return (
     <div className="input-field">
-    {/*<a href="/logout" >Logout</a>*/}
         <input id="searchbar" placeholder="Search for Artist or Track..." onChange={this.updateInput}  onKeyPress={this.onKeyPress}></input>
         <input type="submit" onClick={this.handleSubmit} style={{display: 'none'}}></input>
     </div>
@@ -50,13 +47,13 @@ return (
 
 searchbar.propTypes = {
   searchTerm: PropTypes.func.isRequired,
-  userDetails: PropTypes.func.isRequired,
+
 };
 
 const mapStateToProps = state => ({
   results: state.results.items,
-  creds : state.user.creds
+
  
 });
 
-export default connect(mapStateToProps, { searchTerm, userDetails })(searchbar);
+export default connect(mapStateToProps, { searchTerm })(searchbar);
