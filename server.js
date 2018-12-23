@@ -14,11 +14,8 @@ const settings = require('./config/settings');
 
 
 require('./config/passport')(passport);
-
 const jwt = require('jsonwebtoken');
-
 const port = process.env.PORT || 8080;
-
 const dbRoute = 'mongodb://idoroz:db12345@ds131814.mlab.com:31814/_anymusic_dev';
 
 mongoose.connect(dbRoute, {
@@ -36,28 +33,33 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: settings.secret,
     resave: false,
     saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'build')))
 
+app.get('/home', passport.authenticate('jwt', {
+    session: false
+}), function(req, res) {
+    let token = getToken(req.headers);
+    if (token) {
+        console.log('token')
+    } else {
+        return res.status(403).send({
+            success: false,
+            msg: 'Unauthorized.'
+        });
+    }
+});
 
-
-// Go to registration page
 app.get('/register', (req, res) => {
     res.render('register');
 });
 
-app.get('/home', (req, res) => {
-    res.json({
-        success: true,
-        message: 'at home'
-    });
-});
 
 app.post('/register', function(req, res) {
     if (!req.body.username || !req.body.password) {
@@ -79,7 +81,6 @@ app.post('/register', function(req, res) {
                 });
             }
             let token = jwt.sign(newUser.toJSON(), settings.secret);
-            // return the information including token as JSON
             res.json({
                 success: true,
                 token: 'JWT ' + token
@@ -89,13 +90,11 @@ app.post('/register', function(req, res) {
 });
 
 
-// Go to login page
 app.get('/login', (req, res) => {
     res.render('login');
 });
 
 
-// Post login
 app.post('/login', function(req, res) {
     User.findOne({
         username: req.body.username

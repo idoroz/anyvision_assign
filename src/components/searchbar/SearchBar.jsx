@@ -32,7 +32,6 @@ onKeyPress = (e) => {
 
 render(){
 
-console.log(this.props)
 return (
     <div className="input-field">
         <input id="searchbar" placeholder="Search for Artist or Track..." onChange={this.updateInput}  onKeyPress={this.onKeyPress}></input>

@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const getDetailView = (state = initialState, action) => {
-    let details = []
     switch (action.type) {
     case DETAIL_VIEW:
         return {

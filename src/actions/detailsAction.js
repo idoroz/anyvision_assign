@@ -7,8 +7,6 @@ export const detailView = (details) => {
         type: DETAIL_VIEW,
         payload: details
     }
-
-    console.log('action in detailView', action)
     return action
 }
 

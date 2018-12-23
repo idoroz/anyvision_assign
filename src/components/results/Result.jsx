@@ -14,7 +14,6 @@ constructor(props) {
 }
 
 detailView(data) {
-	console.log('data', data)
 	this.props.detailView(data)
 }
 

@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 
 
 	render() {
-	let details = this.props.selected
+
 	const dateToFormat = this.props.selected.releaseDate;
 	const lengthToFormat = this.props.selected.trackLength
-	const wrapperType = this.props.selected.type ==='track';
+
 
 return (
 		<div className = "detailWrapper">
